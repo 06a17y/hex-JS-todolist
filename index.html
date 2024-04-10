@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/notosanstc.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Tamma+2:600, 700">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/all.css">
+    <title>To Do List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>TODO LIST</h1>
+        <div class="card input">
+          <input type="text" class="txt" placeholder="請輸入待辦事項" />
+          <a href="#" class="btn_add">+</a>
+        </div>
+        <div class="card card_list">
+          <ul class="tab">
+            <li class="active" data-tag="InProgress">全部</li>
+            <li class="" data-tag="InProgress">待完成</li>
+            <li class="" data-tag="Finished">已完成</li>
+          </ul>
+          <div class="cart_content">
+            <ul class="list">
+            </ul>
+            <div class="list_footer">
+              <p>0 個待完成項目</p>
+              <a href="#">清除已完成項目</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <script src="all.js"></script>
+</body>
+</html>
