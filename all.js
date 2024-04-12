@@ -5,6 +5,11 @@ const toDoList = document.querySelector('.list')
 
 const tab = document.querySelector('.tab')
 const tabList = document.querySelectorAll('.tab li')
+const tabAll = document.querySelector('li[data-tag="All"]')
+
+const listFooter = document.querySelector('.list_footer p')
+const clearBtn = document.querySelector('.clear_Item')
+
 
 let toDoData = []
 
@@ -14,7 +19,16 @@ tab.addEventListener('click', function(item){
         e.classList.remove('active')
     })
     item.target.classList.add('active')
-    renderData(toDoData)
+    // 切換tab時候，更新資料
+    if (item.target.getAttribute('data-tag') == 'InProgress') {
+        filterData = toDoData.filter(data => data.isChecked == false)
+        renderData(filterData)
+    } else if (item.target.getAttribute('data-tag') == 'Finished') {
+        filterData = toDoData.filter(data => data.isChecked == true)
+        renderData(filterData)
+    } else {
+        renderData(toDoData)
+    }
 })
 
 toDoList.addEventListener('click', function(item) {
@@ -30,13 +44,15 @@ toDoList.addEventListener('click', function(item) {
         } else {
             toDoData[clickIndex].isChecked = false
         }
-        renderData(toDoData)
-    }   
+    }
+    renderData(toDoData)
 })
 
-function updateList () {
-    console.log(toDoList)
-}
+clearBtn.addEventListener('click', function(item) {
+    console.log(item)
+    toDoData = toDoData.filter(e => e.isChecked == false)
+    renderData(toDoData)
+})
 
 // 新增
 addBtn.addEventListener('click', () => {
@@ -50,10 +66,15 @@ addBtn.addEventListener('click', () => {
         }
         toDoData.push(obj)
     }
+    tabList.forEach(function(e) {
+        e.classList.remove('active')
+    })
+    tabAll.classList.add('active')
     renderData(toDoData)
     addItem.value = ""
 })
 
+// 渲染
 function renderData(toDoData) {
     let str = ''
     toDoData.forEach(function(e, index) {
