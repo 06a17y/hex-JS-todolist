@@ -33,6 +33,7 @@ tab.addEventListener('click', function(item){
 
 toDoList.addEventListener('click', function(item) {
     const clickIndex = item.target.getAttribute('data-index')
+
     // 刪除項目
     if (item.target.getAttribute('class') == 'delete') {
         toDoData.splice(clickIndex, 1)
@@ -40,18 +41,35 @@ toDoList.addEventListener('click', function(item) {
     // 待完成、未完成判斷
         if (item.target.checked == true) {
             toDoData[clickIndex].isChecked = true
-            
+
         } else {
             toDoData[clickIndex].isChecked = false
         }
+
     }
+    // console.log(toDoData)
     renderData(toDoData)
 })
 
 clearBtn.addEventListener('click', function(item) {
-    console.log(item)
+    
     toDoData = toDoData.filter(e => e.isChecked == false)
-    renderData(toDoData)
+
+    tabList.forEach(tabItem => {
+        if (tabItem.classList.contains('active')) {
+            activeTab = tabItem.getAttribute('data-tag');
+            if (activeTab == 'Finished') {
+                filterData = toDoData.filter(data => data.isChecked == true)
+                renderData(filterData)
+            } else if (activeTab == 'InProgress') {
+                filterData = toDoData.filter(data => data.isChecked == false)
+                renderData(filterData)
+            } else {
+                renderData(toDoData)
+            }
+        }
+    })
+    
 })
 
 // 新增
@@ -77,11 +95,15 @@ addBtn.addEventListener('click', () => {
 // 渲染
 function renderData(toDoData) {
     let str = ''
+    let progressNum = 0
+
+
     toDoData.forEach(function(e, index) {
         if (e.isChecked == true) {
             isChecked = "checked"
         } else {
             isChecked = ""
+            progressNum += 1
         }
         str += `<li>
                     <label class="checkbox">
@@ -92,5 +114,7 @@ function renderData(toDoData) {
                 </li>`
     })
     toDoList.innerHTML = str
+    listFooter.textContent = `${progressNum}個待完成項目`
 }
+
 
