@@ -10,7 +10,7 @@ const tabAll = document.querySelector('li[data-tag="All"]')
 const listFooter = document.querySelector('.list_footer p')
 const clearBtn = document.querySelector('.clear_Item')
 
-
+let tabType = "All";
 let toDoData = []
 
 // 切換tab
@@ -19,18 +19,13 @@ tab.addEventListener('click', function(item){
         e.classList.remove('active')
     })
     item.target.classList.add('active')
-    // 切換tab時候，更新資料
-    if (item.target.getAttribute('data-tag') == 'InProgress') {
-        filterData = toDoData.filter(data => data.isChecked == false)
-        renderData(filterData)
-    } else if (item.target.getAttribute('data-tag') == 'Finished') {
-        filterData = toDoData.filter(data => data.isChecked == true)
-        renderData(filterData)
-    } else {
-        renderData(toDoData)
-    }
+    
+    tabType = item.target.getAttribute('data-tag');
+    
+    renderData()
 })
 
+// 點選刪除和待完成/未完成
 toDoList.addEventListener('click', function(item) {
     const clickIndex = item.target.getAttribute('data-index')
 
@@ -47,28 +42,15 @@ toDoList.addEventListener('click', function(item) {
         }
 
     }
-    // console.log(toDoData)
-    renderData(toDoData)
+    renderData()
 })
 
+// 清除所有已完成項目
 clearBtn.addEventListener('click', function(item) {
     
     toDoData = toDoData.filter(e => e.isChecked == false)
-
-    tabList.forEach(tabItem => {
-        if (tabItem.classList.contains('active')) {
-            activeTab = tabItem.getAttribute('data-tag');
-            if (activeTab == 'Finished') {
-                filterData = toDoData.filter(data => data.isChecked == true)
-                renderData(filterData)
-            } else if (activeTab == 'InProgress') {
-                filterData = toDoData.filter(data => data.isChecked == false)
-                renderData(filterData)
-            } else {
-                renderData(toDoData)
-            }
-        }
-    })
+    
+    renderData()
     
 })
 
@@ -87,16 +69,17 @@ addBtn.addEventListener('click', () => {
     tabList.forEach(function(e) {
         e.classList.remove('active')
     })
+    tabType = "All";
     tabAll.classList.add('active')
-    renderData(toDoData)
-    addItem.value = ""
+    
+    renderData()
+    addItem.value = "" 
 })
 
 // 渲染
-function renderData(toDoData) {
-    let str = ''
+function renderData() {
+    let allStr = ''
     let progressNum = 0
-
 
     toDoData.forEach(function(e, index) {
         if (e.isChecked == true) {
@@ -105,15 +88,23 @@ function renderData(toDoData) {
             isChecked = ""
             progressNum += 1
         }
-        str += `<li>
+        str = `<li>
                     <label class="checkbox">
                     <input type="checkbox" data-index="${ index }" ${ isChecked } />
                     <span>${ e.content }</span>
                     </label>
                     <a href="#" class="delete" data-index="${ index }"></a>
                 </li>`
+        
+        // 過濾顯示資料
+        if ((e.isChecked === true) && (tabType === "All" || tabType === "Finished")) {
+            allStr += str;
+        } else if ((e.isChecked === false) && (tabType === "All" || tabType === "InProgress")) {
+            allStr += str;
+        }
     })
-    toDoList.innerHTML = str
+
+    toDoList.innerHTML = allStr
     listFooter.textContent = `${progressNum}個待完成項目`
 }
 
