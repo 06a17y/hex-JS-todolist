@@ -1,4 +1,3 @@
-
 const addItem = document.querySelector('.txt')
 const addBtn = document.querySelector('.btn_add')
 const toDoList = document.querySelector('.list')
@@ -54,7 +53,13 @@ clearBtn.addEventListener('click', function(item) {
     
 })
 
-// 新增
+// 新增TODO項目
+addItem.addEventListener('keydown', function(e) {
+    if (e.key !== "Enter") return;
+    addBtn.click();
+})
+
+
 addBtn.addEventListener('click', () => {
     if (addItem.value.trim() == '') {
         alert('請輸入待辦事項')
@@ -107,5 +112,4 @@ function renderData() {
     toDoList.innerHTML = allStr
     listFooter.textContent = `${progressNum}個待完成項目`
 }
-
 
