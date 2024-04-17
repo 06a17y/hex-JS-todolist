@@ -1,1 +1,1 @@
-# hex-JS-todolist
+# hexSchool-JS-todolist
