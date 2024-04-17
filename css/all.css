@@ -2,36 +2,36 @@
 @import url("https://fonts.googleapis.com/css?family=Baloo+Tamma+2:600, 700");
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 html {
-  font-size: 16px;
-  -webkit-tap-highlight-color: transparent;
+    font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  min-height: 100vh;
-  background: #eee;
-  display: flex;
-  color: #333;
-  background-image: linear-gradient(
-    174deg,
-    #ffd370 2%,
-    #ffd370 46%,
-    #ffffff 46%,
-    #ffffff 100%,
-    #e8e8e8 100%
-  );
-  letter-spacing: 0.07em;
+    min-height: 100vh;
+    background: #eee;
+    display: flex;
+    color: #333;
+    background-image: linear-gradient(
+        174deg,
+        #ffd370 2%,
+        #ffd370 46%,
+        #ffffff 46%,
+        #ffffff 100%,
+        #e8e8e8 100%
+    );
+    letter-spacing: 0.07em;
 }
 
 h1 {
-  text-align: center;
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  font-family: "Baloo Tamma 2";
-  letter-spacing: 0.5rem;
-  font-weight: bold;
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    font-family: "Baloo Tamma 2";
+    letter-spacing: 0.5rem;
+    font-weight: bold;
 }
 @media(max-width: 575px) {
     h1 {
@@ -40,9 +40,9 @@ h1 {
     }
 }
 .container {
-  margin: 3rem auto 1.5rem auto;
-  padding: 0 12px;
-  width: 500px;
+    margin: 3rem auto 1.5rem auto;
+    padding: 0 12px;
+    width: 500px;
 }
 @media (max-width: 575px) {
     .container {
@@ -91,7 +91,7 @@ input[type=text]::placeholder {
 
 /* card list */
 .card_list {
-  padding: 0;
+    padding: 0;
 }
 
 .tab {
@@ -104,6 +104,7 @@ input[type=text]::placeholder {
     padding: 1rem;
     width: 100%;
     border-bottom: 2px solid #efefef;
+    cursor: pointer;
 }
 .tab li.active {
     border-bottom: 2px solid #333;
@@ -112,7 +113,7 @@ input[type=text]::placeholder {
 }
 
 .cart_content {
-  padding: 0.5rem 1rem 1rem 1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
 }
 @media (max-width: 575px) {
     .cart_content {
@@ -154,11 +155,11 @@ input[type=text]::placeholder {
     opacity: 1;
   }
 .list_footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 2rem 1rem 0.5rem;
-  font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem 1rem 0.5rem;
+    font-size: 14px;
 }
 .list_footer a {
     color: #9f9a91;
